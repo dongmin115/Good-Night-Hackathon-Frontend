@@ -1,18 +1,31 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import React from "react";
 import CategoryMenu from "../components/category-menu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons/faArrowDown";
+import axios from "axios";
 
 type MouseEventHandler<T extends HTMLElement> = React.MouseEventHandler<T>;
 
 export default function RegisterMovie() {
     const [categoryBtn,setCategoryBtn] = useState(false);
+    const [movies,setMoives] = useState("");
+
+    const getMovies = async () => {
+        var response = await axios.get("/movies");
+        setMoives(response.data);
+
+        console.log(movies);
+    };
 
     const onClick: MouseEventHandler<HTMLDivElement> = () => {
         setCategoryBtn(!categoryBtn);
     }
+
+    useEffect(()=>{
+        getMovies();
+    },[])
 
     return (
     <div className="w-full h-1/3 px-4 py-4 bg-gray-900 flex-col">
