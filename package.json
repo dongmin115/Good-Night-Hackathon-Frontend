@@ -15,11 +15,16 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mui/x-date-pickers": "^6.18.2",
+    "@types/react-datepicker": "^4.19.3",
     "axios": "^1.6.2",
+    "dayjs": "^1.11.10",
     "react": "^18.2.0",
+    "react-datepicker": "^4.23.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.29",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
