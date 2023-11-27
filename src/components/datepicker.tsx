@@ -8,9 +8,9 @@ export default function DatePicker() {
   const [endDate,setEndDate] = useState<Date|null>(new Date());
     
   return (
-    <div className="w-full text-center text-lg my-6">
+    <div className="w-full text-center text-lg my-10">
       <p className="text-orange-400 my-3">개봉일 입력</p>
-      <div className="">
+      <div className="mb-10">
       <ReactDatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
       </div>
       <p className="text-orange-400 my-3">상영종료일 입력</p>
