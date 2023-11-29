@@ -1,21 +1,18 @@
-import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function DatePicker() {
+export default function DatePicker(props:any) {
 
-  const [startDate, setStartDate] = useState<Date|null>(new Date());
-  const [endDate,setEndDate] = useState<Date|null>(new Date());
     
   return (
-    <div className="w-full text-center text-lg my-10">
+    <div className="w-full h-fit text-center text-lg mb-10">
       <p className="text-orange-400 my-3">개봉일 입력</p>
-      <div className="mb-10">
-      <ReactDatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+      <div className="">
+      <ReactDatePicker selected={props.releasedAt} onChange={(date) => props.setReleasedAt(date)} />
       </div>
       <p className="text-orange-400 my-3">상영종료일 입력</p>
       <div className="">
-      <ReactDatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+      <ReactDatePicker selected={props.endAt} onChange={(date) => props.setEndAt(date)} />
       </div>
     </div>
   );
