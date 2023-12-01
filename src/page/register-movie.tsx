@@ -12,20 +12,20 @@ type MouseEventHandler<T extends HTMLElement> = React.MouseEventHandler<T>;
 export default function RegisterMovie() {
     const [categoryBtn,setCategoryBtn] = useState(false);
     const [movies,setMoives] = useState<any>([]);
-    const [title,setTitle] = useState<any>("");
+    const [title,setTitle] = useState("");
     const [genre,setGenre] = useState("");
     const [releaedAt,setReleasedAt] = useState("");
     const [endAt,setEndAt] = useState("");
 
 
     const getMovies = async () => {
-        var response = await axios.get("/movies");
+        var response = await axios.get('/movies');
         setMoives(response.data);
-
         console.log(movies);
     };
 
-    const registerMovie = async () => {
+    const registerMovie = async (event:any) => {
+        event.preventDefault();
 
         const formData = new FormData();
 
@@ -34,14 +34,15 @@ export default function RegisterMovie() {
         formData.append("releasedAt",releaedAt);
         formData.append("title",title);
 
-        const response = await axios.post("/movies",formData,{
+        const response = await axios.post("http://localhost:8080/api/v1/movies",formData,{
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type' : 'application/json',
+                'Accept': 'application/json'
             }
         });
 
         setMoives((prev: any) => [...prev,response.data]);
-
+        console.log("dkdkdkdk");
     }
     
 
@@ -51,6 +52,7 @@ export default function RegisterMovie() {
 
     const handleInputChange = (event:any) => {
         setTitle(event.target.value);
+        console.log(title,genre,releaedAt,endAt);
     };
 
     useEffect(()=>{
