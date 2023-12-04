@@ -1,7 +1,7 @@
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/locale";
-
+//날짜 형식 어떻게 해야하는지 모르겠음
 export default function DatePicker(props:any) {
 
     

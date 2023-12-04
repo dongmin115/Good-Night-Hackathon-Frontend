@@ -19,7 +19,7 @@ export default function RegisterMovie() {
 
 
     const getMovies = async () => {
-        var response = await axios.get('/movies');
+        var response = await axios.get('http://localhost:8080/api/v1/movies');
         setMoives(response.data);
         console.log(movies);
     };
@@ -27,22 +27,22 @@ export default function RegisterMovie() {
     const registerMovie = async (event:any) => {
         event.preventDefault();
 
-        const formData = new FormData();
+        const jsonForm = {
+            "endAt" : endAt,
+            "genre" : genre,
+            "releasedAt" : releaedAt,
+            "title" : title,
+        }
 
-        formData.append("endAt",endAt);
-        formData.append("genre",genre);
-        formData.append("releasedAt",releaedAt);
-        formData.append("title",title);
 
-        const response = await axios.post("http://localhost:8080/api/v1/movies",formData,{
+        const response = await axios.post("http://localhost:8080/api/v1/movies",jsonForm,{
             headers: {
                 'Content-Type' : 'application/json',
-                'Accept': 'application/json'
             }
         });
 
         setMoives((prev: any) => [...prev,response.data]);
-        console.log("dkdkdkdk");
+        console.log(response.data);
     }
     
 
