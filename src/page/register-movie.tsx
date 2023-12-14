@@ -6,6 +6,7 @@ import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons/faArrowDown";
 import axios from "axios";
 import DatePicker from "../components/datepicker";
+import { useNavigate } from 'react-router-dom';
 
 type MouseEventHandler<T extends HTMLElement> = React.MouseEventHandler<T>;
 
@@ -16,6 +17,7 @@ export default function RegisterMovie() {
     const [genre,setGenre] = useState("");
     const [releaedAt,setReleasedAt] = useState("");
     const [endAt,setEndAt] = useState("");
+    const navigate = useNavigate();
 
 
     const getMovies = async () => {
@@ -24,9 +26,9 @@ export default function RegisterMovie() {
         console.log(movies);
     };
 
-    const registerMovie = async (event:any) => {
-        event.preventDefault();
-
+    const registerMovie = async (e:any) => {
+        e.preventDefault();
+        
         const jsonForm = {
             "endAt" : endAt,
             "genre" : genre,
@@ -43,6 +45,7 @@ export default function RegisterMovie() {
 
         setMoives((prev: any) => [...prev,response.data]);
         console.log(response.data);
+        navigate('/');
     }
     
 
@@ -52,7 +55,6 @@ export default function RegisterMovie() {
 
     const handleInputChange = (event:any) => {
         setTitle(event.target.value);
-        console.log(title,genre,releaedAt,endAt);
     };
 
     useEffect(()=>{

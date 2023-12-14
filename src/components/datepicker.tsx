@@ -16,10 +16,6 @@ export default function DatePicker(props:any) {
       shouldCloseOnSelect
       selected={props.releasedAt} 
       onChange={(date:any) => {
-        if (date) {
-          const isoDateString = date.toISOString();
-          console.log(isoDateString); // ISO 8601 형식으로 변환된 날짜 출력
-        }
         props.setReleasedAt(date);
         }} />
       </div>
