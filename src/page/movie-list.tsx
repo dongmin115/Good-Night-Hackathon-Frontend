@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function MovieList() {
 
@@ -8,12 +9,22 @@ export default function MovieList() {
     const [movies,setMovies] = useState(location.state && location.state.movies ? location.state.movies : []);
     console.log(movies);
 
-    const RemoveMovieList = (e:any, id:number) => {
+    const getMovies = async () => {
+        var response = await axios.get('http://localhost:8080/api/v1/movies');
+        setMovies(response.data);
+    };
+
+    const RemoveMovieList = async (e:any, id:number) => {
         e.preventDefault();
-        // filter 함수를 사용하여 해당 ID를 가진 영화를 제외한 새로운 배열을 생성합니다.
-        const updatedMovies = movies.filter((element:any) => element.id !== id);
+        await axios.delete(`http://localhost:8080/api/v1/movies/${id}`);
+        // 삭제 요청이 완료되면 새로운 배열을 설정합니다.
+        const updatedMovies = movies.filter((element: any) => element.id !== id);
         setMovies(updatedMovies);
     }
+
+    useEffect(()=>{
+        getMovies();
+    },[]);
     return (
     <div className="w-full h-full px-[10%] py-[5%] text-center text-white ">
         {/*필터링메뉴*/}
