@@ -1,11 +1,19 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 export default function MovieList() {
 
     const location = useLocation();
-    const movies = location.state && location.state.movies ? location.state.movies : [];
+    const [movies,setMovies] = useState(location.state && location.state.movies ? location.state.movies : []);
     console.log(movies);
+
+    const RemoveMovieList = (e:any, id:number) => {
+        e.preventDefault();
+        // filter 함수를 사용하여 해당 ID를 가진 영화를 제외한 새로운 배열을 생성합니다.
+        const updatedMovies = movies.filter((element:any) => element.id !== id);
+        setMovies(updatedMovies);
+    }
     return (
     <div className="w-full h-full px-[10%] py-[5%] text-center text-white ">
         {/*필터링메뉴*/}
@@ -41,7 +49,8 @@ export default function MovieList() {
         {movies.map((element:any) => (
             <li key={element.id} className="my-2">{element.title}
             <button className="px-1 mx-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">수정</button>
-            <button className="px-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">삭제</button>
+            <button className="px-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold"
+            onClick={(e) => RemoveMovieList(e,element.id)}>삭제</button>
             </li>
         ))}
         </ul>
