@@ -45,7 +45,7 @@ export default function RegisterMovie() {
 
         setMoives((prev: any) => [...prev,response.data]);
         console.log(response.data);
-        navigate('/');
+        navigate('/',{ state : {movies: movies}});
     }
     
 

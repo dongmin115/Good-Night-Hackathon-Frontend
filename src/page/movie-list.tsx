@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 export default function MovieList() {
 
+    const location = useLocation();
+    const movies = location.state && location.state.movies ? location.state.movies : [];
+    console.log(movies);
     return (
     <div className="w-full h-full px-[10%] py-[5%] text-center text-white ">
         {/*필터링메뉴*/}
@@ -33,26 +38,12 @@ export default function MovieList() {
         </div>
         </div>
         <ul className="text-white">
-        <li className="my-2">영화1
-        <button className="px-1 mx-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">수정</button>
-        <button className="px-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">삭제</button>
-        </li>
-        <li className="my-2">영화2
-        <button className="px-1 mx-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">수정</button>
-        <button className="px-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">삭제</button>
-        </li>
-        <li className="my-2">영화3
-        <button className="px-1 mx-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">수정</button>
-        <button className="px-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">삭제</button>
-        </li>
-        <li className="my-2">영화4
-        <button className="px-1 mx-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">수정</button>
-        <button className="px-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">삭제</button>
-        </li>
-        <li className="my-2">영화5
-        <button className="px-1 mx-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">수정</button>
-        <button className="px-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">삭제</button>
-        </li>
+        {movies.map((element:any) => (
+            <li key={element.id} className="my-2">{element.title}
+            <button className="px-1 mx-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">수정</button>
+            <button className="px-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">삭제</button>
+            </li>
+        ))}
         </ul>
         <button className="px-2 py-2 my-4 border rounded-md border-orange-400 text-gray-900 bg-orange-400 font-bold cursor-pointer"><Link to="/register">추가하기</Link></button>
         <ul className="flex justify-center my-2">
