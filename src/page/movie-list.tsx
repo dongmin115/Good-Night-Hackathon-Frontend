@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function MovieList() {
-
+    const navigate = useNavigate();
     const location = useLocation();
     const [movies,setMovies] = useState(location.state && location.state.movies ? location.state.movies : []);
     console.log(movies);
@@ -20,6 +20,11 @@ export default function MovieList() {
         // 삭제 요청이 완료되면 새로운 배열을 설정합니다.
         const updatedMovies = movies.filter((element: any) => element.id !== id);
         setMovies(updatedMovies);
+    }
+
+    const moveToPutPage = async (e:any, id:number) => {
+        e.preventDefault();
+        navigate(`/put/${id}`);
     }
 
     useEffect(()=>{
@@ -57,13 +62,27 @@ export default function MovieList() {
         </div>
         </div>
         <ul className="text-white">
-        {movies.map((element:any) => (
-            <li key={element.id} className="my-2">{element.title}
-            <button className="px-1 mx-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold">수정</button>
-            <button className="px-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold"
-            onClick={(e) => RemoveMovieList(e,element.id)}>삭제</button>
+        {movies && movies.length > 0 ? (
+            movies.map((element: any) => (
+            <li key={element.id} className="my-2">
+                {element.title}
+                <button
+                className="px-1 mx-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold"
+                onClick={(e) => moveToPutPage(e, element.id)}
+                >
+                수정
+                </button>
+                <button
+                className="px-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold"
+                onClick={(e) => RemoveMovieList(e, element.id)}
+                >
+                삭제
+                </button>
             </li>
-        ))}
+            ))
+        ) : (
+            <li className="text-gray-400">영화 목록이 없습니다.</li>
+        )}
         </ul>
         <button className="px-2 py-2 my-4 border rounded-md border-orange-400 text-gray-900 bg-orange-400 font-bold cursor-pointer"><Link to="/register">추가하기</Link></button>
         <ul className="flex justify-center my-2">
