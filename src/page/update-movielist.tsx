@@ -52,6 +52,18 @@ export default function UpdateMovieList() {
         getMovies();
     }, [])
 
+    useEffect(() => {
+        if(id !== undefined){
+        var numericId = parseInt(id,10);
+        }
+        movies.map((e: any) => {
+            if (e.id === numericId) {
+                setTitle(e.title);
+                setGenre(e.genre);
+            }
+        });
+    }, [movies, id, genre]);
+
     return (
     <div className="w-full h-full px-4 py-4 bg-gray-900 flex-col">
     <h1 className="text-orange-400 w-full text-center text-3xl my-4">영화 수정</h1>

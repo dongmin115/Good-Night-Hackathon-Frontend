@@ -1,7 +1,4 @@
 export default function CategoryMenu (props:any) {
-
-    
-    
     return (
         <ul className='text-orange-400 text-center text-lg w-full'>
             <li className='py-2 hover:bg-slate-600 rounded-lg'>
