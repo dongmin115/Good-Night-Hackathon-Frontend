@@ -19,6 +19,7 @@ export default function UpdateMovieList() {
     const [endAt,setEndAt] = useState("");
     const navigate = useNavigate();
     const {id} = useParams();
+    
 
     const getMovies = async () => {
         var response = await axios.get('http://localhost:8080/api/v1/movies');
@@ -58,7 +59,7 @@ export default function UpdateMovieList() {
     onSubmit={PutMovie}>
     <input className="w-1/2 h-[10%] my-4 px-4 border-orange-400 border-2 bg-gray-900 rounded-md focus:outline-none focus:border-2 focus:border-orange-600 text-gray-300" 
     type="text" 
-    placeholder="수정할 영화 제목을 입력하세요"
+    placeholder={title}
     value={title}
     onChange={handleInputChange}/>
     <div id="category-menu" className="bg-gray-900 w-full h-fit flex my-2 items-center cursor-pointer" onClick={onClick}>

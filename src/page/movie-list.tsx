@@ -7,7 +7,6 @@ export default function MovieList() {
     const navigate = useNavigate();
     const location = useLocation();
     const [movies,setMovies] = useState(location.state && location.state.movies ? location.state.movies : []);
-    console.log(movies);
 
     const getMovies = async () => {
         var response = await axios.get('http://localhost:8080/api/v1/movies');
@@ -25,6 +24,11 @@ export default function MovieList() {
     const moveToPutPage = async (e:any, id:number) => {
         e.preventDefault();
         navigate(`/put/${id}`);
+    }
+
+    const moveToDetails = async (e:any, id:number) => {
+        e.preventDefault();
+        navigate(`/details/${id}`);
     }
 
     useEffect(()=>{
@@ -66,6 +70,12 @@ export default function MovieList() {
             movies.map((element: any) => (
             <li key={element.id} className="my-2">
                 {element.title}
+                <button
+                className="px-1 mx-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold"
+                onClick={(e) => moveToDetails(e, element.id)}
+                >
+                상세정보
+                </button>
                 <button
                 className="px-1 mx-1 border border-orange-400 rounded-md bg-orange-400 text-gray-900 font-bold"
                 onClick={(e) => moveToPutPage(e, element.id)}
